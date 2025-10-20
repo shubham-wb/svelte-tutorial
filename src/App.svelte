@@ -1,16 +1,13 @@
-/<!-- logic -->
+<!-- logic -->
 <script lang="ts">
-  let title:string = "svelte";
+  const obj = {
+    src: "https://media.cnn.com/api/v1/images/stellar/prod/211227135008-02-the-batman-trailer.jpg?c=16x9&q=h_653,w_1160,c_fill/f_avif",
+    alt: "The Batman Movie Poster",
+  };
+  const lazy = false;
 </script>
 
-<!-- markup -->
-<h1>
-  hello {title as string}
-</h1>
+/<!-- markup -->
+<img src={obj.src} alt={obj.alt} loading={lazy ? "lazy" : null} />
 
 <!-- styles -->
-<style>
-  h1 {
-    color: orangered;
-  }
-</style>
