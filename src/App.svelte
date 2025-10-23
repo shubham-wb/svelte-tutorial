@@ -1,5 +1,5 @@
 <script>
-  let numbers = [1, 2, 3, 4];
+  let numbers = $state([1, 2, 3, 4]);
 
   function addNumber() {
     numbers[numbers.length] = numbers.length + 1;
