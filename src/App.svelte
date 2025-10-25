@@ -1,21 +1,58 @@
-<script lang="ts">
-  import Nested from "./Nested.svelte";
-  import { counter } from "./shared.svelte.js";
-
-  function increment() {
-    counter.count += 1;
-  }
+<script>
+  const colors = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "indigo",
+    "violet",
+  ];
+  let selected = $state(colors[0]);
 </script>
 
-<h1>Counter: {counter.count}</h1>
-<button onclick={increment}>Increment</button>
-<Nested {counter} />
-<Nested />
+<h1 style="color: {selected}">Pick a colour</h1>
 
-{#if counter.count > 30}
-  <p>{counter.count} is greater than 30</p>
-{:else if counter.count < 21}
-  <p>{counter.count} is less than 21</p>
-{:else}
-  <p>{counter.count} is between 21 and 30</p>
-{/if}
+<div>
+  {#each colors as color, index}
+    <button
+      style="background: {color}"
+      aria-label={color}
+      aria-current={selected === color}
+      onclick={() => (selected = color)}>{index}</button
+    >
+  {/each}
+</div>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+
+  div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    max-width: 400px;
+  }
+
+  button {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color, #fff);
+    transform: translate(-2px, -2px);
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+    transition: all 0.1s;
+    color: black;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+
+  button[aria-current="true"] {
+    transform: none;
+    filter: none;
+    box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>
