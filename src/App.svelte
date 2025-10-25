@@ -14,4 +14,6 @@
 
 {#if counter.count > 20}
   <p>The counter is greater than 20!</p>
+{:else}
+  <p>The counter is 20 or less.</p>
 {/if}
