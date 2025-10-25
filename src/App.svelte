@@ -12,8 +12,10 @@
 <Nested {counter} />
 <Nested />
 
-{#if counter.count > 20}
-  <p>The counter is greater than 20!</p>
+{#if counter.count > 30}
+  <p>{counter.count} is greater than 30</p>
+{:else if counter.count < 21}
+  <p>{counter.count} is less than 21</p>
 {:else}
-  <p>The counter is 20 or less.</p>
+  <p>{counter.count} is between 21 and 30</p>
 {/if}
