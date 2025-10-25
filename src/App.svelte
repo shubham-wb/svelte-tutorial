@@ -1,19 +1,10 @@
-<script>
-  let elapsed = $state(0);
-  let interval = $state(1000);
+<script lang="ts">
+  import { counter } from "./shared.svelte.js";
 
-  $effect(() => {
-    const id = setInterval(() => {
-      elapsed += 1;
-    }, interval);
-
-    return () => {
-      clearInterval(id);
-    };
-  });
+  function increment() {
+    counter.count += 1;
+  }
 </script>
 
-<button onclick={() => (interval /= 2)}>speed up</button>
-<button onclick={() => (interval *= 2)}>slow down</button>
-
-<p>elapsed: {elapsed}</p>
+<h1>Counter: {counter.count}</h1>
+<button onclick={increment}>Increment</button>
