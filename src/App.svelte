@@ -1,22 +1,48 @@
 <script>
-  let name = $state("world");
-  let a = $state(1);
-  let b = $state(2);
+  let questions = [
+    {
+      id: 1,
+      text: `Where did you go to school?`,
+    },
+    {
+      id: 2,
+      text: `What is your mother's name?`,
+    },
+    {
+      id: 3,
+      text: `What is another personal fact that an attacker could easily find with Google?`,
+    },
+  ];
+
+  let selected = $state();
+
+  let answer = $state("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    alert(
+      `answered question ${selected.id} (${selected.text}) with "${answer}"`
+    );
+  }
 </script>
 
-<input bind:value={name} />
-<!-- use bind to attach handler with input element  -->
+<h2>Insecurity questions</h2>
 
-<label>
-  <input type="number" bind:value={a} min="0" max="10" />
-  <input type="range" bind:value={a} min="0" max="10" />
-</label>
+<form onsubmit={handleSubmit}>
+  <select bind:value={selected} onchange={() => (answer = "")}>
+    {#each questions as question}
+      <option value={question}>
+        {question.text}
+      </option>
+    {/each}
+  </select>
 
-<label>
-  <input type="number" bind:value={b} min="0" max="10" />
-  <input type="range" bind:value={b} min="0" max="10" />
-</label>
+  <input bind:value={answer} />
 
-<p>{a} + {b} = {a + b}</p>
+  <button disabled={!answer} type="submit"> Submit </button>
+</form>
 
-<h1>Hello {name}!</h1>
+<p>
+  selected question {selected ? selected.id : "[waiting...]"}
+</p>
