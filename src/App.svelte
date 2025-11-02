@@ -1,10 +1,24 @@
 <script>
+  import { flip } from "svelte/animate";
+
   let flipped = $state(false);
 </script>
 
 <div class="container">
   Flip the card
-  <button class="card" onclick={() => (flipped = !flipped)}>
+  <!-- single class  -->
+  <!-- <button class={["card", { flipped }]} onclick={() => (flipped = !flipped)}> -->
+
+  <!-- Multiple class -->
+
+  <button
+    class="card"
+    style:transform={flipped ? "rotateY(0)" : ""}
+    style:--bg-1="palegoldenrod"
+    style:--bg-2="black"
+    style:--bg-3="goldenrod"
+    onclick={() => (flipped = !flipped)}
+  >
     <div class="front">
       <span class="symbol">♠</span>
     </div>
